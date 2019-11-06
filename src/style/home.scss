@@ -1,0 +1,91 @@
+@import './definition.scss';
+
+div.account {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  &::after {
+    content: '';
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+  img.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  img.logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5rem;
+    z-index: 10;
+  }
+  form {
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    min-height: 600px;
+    margin: auto;
+    transform: translateY(8vw);
+    width: 450px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 4rem;
+    h1 {
+      text-align: left;
+      color: white;
+      margin-bottom: 2rem;
+    }
+    .input-field {
+      position: relative;
+    }
+    input,
+    button {
+      font-weight: bold;
+      color: white;
+      height: 50px;
+      width: 100%;
+      border-radius: 4px;
+      outline: none;
+      border: none;
+    }
+    input {
+      background: #333;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1.5rem;
+    }
+    button {
+      font-size: 1rem;
+      margin-top: 2.5rem;
+      background-color: color(red);
+      cursor: pointer;
+    }
+    label {
+      color: color(gray);
+      position: absolute;
+      top: 23px;
+      left: 1.5rem;
+      transition: 0.1s ease;
+    }
+    input:focus ~ label,
+    input:valid ~ label {
+      top: 10px;
+      left: 24px;
+      font-size: 0.7rem;
+    }
+  }
+}
+
+@import './profile.scss';
+@import './browse.scss';
+@import './transitions.scss';

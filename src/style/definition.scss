@@ -1,0 +1,18 @@
+$colors: (
+  red: #e50914,
+  darkRed: #b20710,
+  black: #141414,
+  gray: gray,
+  green: #46d369
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+} //PREBACITI NEGDJE DALJE

@@ -1,0 +1,53 @@
+.video_fade-leave-active {
+  transition: opacity 0.75s;
+}
+
+.video_fade-enter {
+  opacity: 1;
+}
+.video_fade-leave-active {
+  opacity: 0;
+}
+
+.details-enter-active,
+.details-leave-active {
+  will-change: max-height;
+  transition-duration: 0.5s;
+  transition-property: all;
+  max-height: 65vh;
+}
+
+.details-enter,
+.details-leave-to {
+  opacity: 0;
+  max-height: 0px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+@keyframes opacity-anim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes profileEnter {
+  from {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

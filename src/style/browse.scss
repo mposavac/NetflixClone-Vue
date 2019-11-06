@@ -1,0 +1,329 @@
+@import './definition.scss';
+
+html {
+  background: color(black);
+}
+
+.browse-main {
+  background: color(black);
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 68px;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
+    transition: 0.5s background-color;
+    z-index: 100;
+    &.scroll {
+      background-color: black;
+    }
+    img {
+      height: 45px;
+      width: 98.5px;
+      margin: 0 4%;
+    }
+    p {
+      margin-right: 1rem;
+      color: white;
+      font-size: 1rem;
+    }
+  }
+
+  video {
+    height: 100vh;
+    object-fit: cover;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+
+  .billboard {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    img.poster {
+      height: 100%;
+      min-width: 100%;
+      object-fit: cover;
+    }
+    .text-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: left;
+      padding-left: 4%;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.8) 35%,
+        transparent
+      );
+      h1 {
+        color: white;
+        font-size: 4.5vw;
+      }
+      p {
+        margin-top: 1rem;
+        color: white;
+        font-size: 1.4vw;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
+        width: 80%;
+      }
+      .buttons {
+        margin: 2.5vw 0 7vw 0;
+        button {
+          background: rgba(51, 51, 51, 0.4);
+          border: none;
+          font-size: 1.2vw;
+          padding: 0.75rem 2.8rem;
+          margin-right: 1rem;
+          color: white;
+          outline: none;
+          cursor: pointer;
+          img {
+            filter: invert(1);
+            height: 15px;
+            width: 15px;
+            margin-right: 6px;
+          }
+          i {
+            margin-right: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .list {
+    text-align: left;
+    margin-top: 1rem;
+    h2 {
+      color: white;
+      margin-left: 1.5rem;
+    }
+    .items-wrapper {
+      position: relative;
+      width: 100%;
+      overflow-x: visible;
+      display: grid;
+      //grid-template-columns: repeat(3, 100%);
+      height: 300px;
+
+      section {
+        display: flex;
+        flex-direction: row;
+        overflow-x: scroll; //za sada
+      }
+      img.arrow {
+        position: absolute;
+        top: 100px;
+        filter: invert(1);
+        &.right {
+          right: 1rem;
+          transform: rotateZ(-90deg);
+        }
+        &.left {
+          left: 1rem;
+          transform: rotateZ(90deg);
+        }
+      }
+      .item {
+        display: inline;
+        margin-left: 1.5rem;
+        img {
+          margin: 0.25rem 2px;
+        }
+        //touch-action: pan-x; //STA GOD OVO JE
+      }
+    }
+  }
+
+  .details-wrapper {
+    background: black;
+    height: 65vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    .text-wrapper {
+      color: color(gray);
+      position: relative;
+      height: 100%;
+      width: 45%;
+      z-index: 10;
+      margin-left: 4%;
+      padding-top: 2.5rem;
+      padding-right: 12%;
+      background: linear-gradient(to right, black 60%, transparent);
+
+      h1,
+      div,
+      p.description {
+        opacity: 0;
+        animation: 0.7s slideIn forwards ease;
+        animation-delay: 0.4s;
+      }
+      h1 {
+        font-size: 3vw;
+        margin-bottom: 1rem;
+      }
+      .basic-info {
+        margin: 0.5rem 0;
+        p {
+          font-size: 1vw;
+          display: inline;
+          margin-right: 1.2rem;
+          font-weight: bold;
+        }
+        .match {
+          color: color(green);
+        }
+        .year {
+          color: white;
+        }
+        .adult {
+          color: white;
+          padding: 0.25rem 0.5rem;
+          border: color(gray) 1px solid;
+        }
+      }
+      .description {
+        margin-top: 1.5rem;
+        font-size: 1.2vw;
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        margin: 1.5rem 0;
+
+        button,
+        i.fa-thumbs-up {
+          margin-right: 0.75rem;
+        }
+        button {
+          color: white;
+          font: 1.2vw;
+          font-weight: bold;
+          padding: 0.75rem 1.5rem;
+          border: none;
+          outline: none;
+          &.btn-play {
+            background: color(red);
+            img {
+              filter: invert(1);
+              height: 20px;
+              width: 20px;
+              margin-right: 6px;
+              margin-bottom: -4px;
+            }
+          }
+          &.btn-list {
+            background: transparent;
+            border: 1px white solid;
+            margin-right: 2.5rem;
+            i.fa-plus {
+              margin-right: 6px;
+            }
+          }
+        }
+        i.fa-thumbs-up {
+          font-size: 1.2vw;
+          border: 1px color(gray) solid;
+          color: white;
+          border-radius: 50%;
+          padding: 0.5rem;
+          &.dislike {
+            transform: rotateX(180deg);
+          }
+        }
+      }
+    }
+    .fa-times {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      z-index: 10;
+      font-size: 1.7rem;
+      color: rgba(255, 255, 255, 0.6);
+      cursor: pointer;
+    }
+    img.poster {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 70%;
+      object-fit: cover;
+      height: 100%;
+      z-index: 1;
+    }
+    iframe {
+      position: absolute;
+      top: -20%;
+      width: 70%;
+      right: 0;
+      margin-right: -6px;
+      z-index: 0;
+      height: 140%;
+    }
+  }
+
+  footer {
+    width: 65%;
+    margin: 3.5rem auto 0 auto;
+    text-align: left;
+    color: color(gray);
+    section {
+      margin: 1rem auto;
+      &.social i {
+        font-size: 2rem;
+        margin-right: 1.5rem;
+      }
+      &.links {
+        display: flex;
+        flex-direction: row;
+        div {
+          flex: 1;
+          p {
+            margin: 0.75rem 0;
+            font-size: 0.8rem;
+          }
+        }
+      }
+      &.disclaimer {
+        margin: 1rem 0;
+        p {
+          display: inline;
+        }
+        img {
+          height: 30px;
+          margin-bottom: -9px;
+        }
+        a {
+          color: color(gray);
+          line-height: 34px;
+        }
+      }
+    }
+    button {
+      padding: 0.4rem;
+      border: 1px color(gray) solid;
+      color: color(gray);
+      background: none;
+      outline: none;
+    }
+    p.copyrights {
+      padding-bottom: 1rem;
+    }
+  }
+}
