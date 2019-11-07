@@ -65,11 +65,7 @@ html {
       justify-content: flex-end;
       text-align: left;
       padding-left: 4%;
-      background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.8) 35%,
-        transparent
-      );
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, transparent);
       h1 {
         color: white;
         font-size: 4.5vw;
@@ -108,11 +104,76 @@ html {
 
   .list {
     text-align: left;
+    position: relative;
     margin-top: 1rem;
     h2 {
       color: white;
       margin-left: 1.5rem;
     }
+    div.arrow-div {
+      position: absolute;
+      top: 1.5em;
+      background: rgba(0, 0, 0, 0.6);
+      height: calc(100% - 1.5em);
+      width: 2.5rem;
+      overflow: hidden;
+      transition: 0.5s;
+      &.hidden {
+        opacity: 0;
+      }
+      &.right {
+        right: 0;
+        img {
+          transform: rotateZ(-90deg) translateY(-5px);
+        }
+      }
+      &.left {
+        left: 0;
+        img {
+          transform: rotateZ(90deg) translateY(5px);
+        }
+      }
+
+      img {
+        position: absolute;
+        top: calc(125px - 1.5em);
+        filter: invert(1);
+      }
+    }
+    .wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 250px;
+      padding-top: 10px;
+      transition: 0.5s;
+      .slides {
+        display: flex;
+        position: relative;
+        top: 0;
+        left: 3%;
+        width: 10000px;
+        transition: 0.5s;
+        .item {
+          display: inline;
+          margin-left: 0.1em;
+
+          img {
+            height: 230px;
+            transition: 0.25s;
+            object-fit: cover;
+          }
+          &:hover {
+            img {
+              transform: scale(1.15);
+            }
+          }
+          //touch-action: pan-x; //STA GOD OVO JE
+        }
+      }
+    }
+
+    /*
     .items-wrapper {
       position: relative;
       width: 100%;
@@ -126,33 +187,21 @@ html {
         flex-direction: row;
         overflow-x: scroll; //za sada
       }
-      img.arrow {
-        position: absolute;
-        top: 100px;
-        filter: invert(1);
-        &.right {
-          right: 1rem;
-          transform: rotateZ(-90deg);
-        }
-        &.left {
-          left: 1rem;
-          transform: rotateZ(90deg);
-        }
-      }
+      
       .item {
         display: inline;
-        margin-left: 1.5rem;
+        margin-left: 0.5rem;
         img {
           margin: 0.25rem 2px;
         }
         //touch-action: pan-x; //STA GOD OVO JE
       }
-    }
+    }*/
   }
 
   .details-wrapper {
     background: black;
-    height: 65vh;
+    height: 70vh;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -160,7 +209,7 @@ html {
       color: color(gray);
       position: relative;
       height: 100%;
-      width: 45%;
+      width: 50%;
       z-index: 10;
       margin-left: 4%;
       padding-top: 2.5rem;

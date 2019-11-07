@@ -1,5 +1,8 @@
 @import './definition.scss';
 
+html {
+  scroll-behavior: smooth;
+}
 div.account {
   position: relative;
   height: 100vh;

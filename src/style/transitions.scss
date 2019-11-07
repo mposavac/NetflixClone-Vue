@@ -1,11 +1,16 @@
-.video_fade-leave-active {
+.video_fade-leave-active,
+.picture_fade-enter-active,
+.picture_fade-leave-active {
   transition: opacity 0.75s;
+  opacity: 1;
 }
 
 .video_fade-enter {
   opacity: 1;
 }
-.video_fade-leave-active {
+.video_fade-leave-active,
+.picture_fade-enter,
+.picture_fade-leave-to {
   opacity: 0;
 }
 
@@ -21,6 +26,10 @@
 .details-leave-to {
   opacity: 0;
   max-height: 0px;
+}
+
+.details-text-enter-active {
+  animation: slideIn 0.5s forwards;
 }
 
 @keyframes slideIn {

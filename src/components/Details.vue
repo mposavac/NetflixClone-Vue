@@ -2,16 +2,16 @@
   <div>
     <div class="details-wrapper">
       <div class="text-wrapper">
-        <h1>{{content.name ? content.name : content.title}}</h1>
-        <div class="basic-info">
+        <h1 key="h1">{{content.name ? content.name : content.title}}</h1>
+        <div key="basic" class="basic-info">
           <p class="match">{{content.vote_average*10}}% Match</p>
           <p
             class="year"
           >{{content.first_air_date ? content.first_air_date.substr(0,4) : content.release_date.substr(0,4)}}</p>
           <p class="adult">13 +</p>
         </div>
-        <p class="description">{{content.overview.substr(0,386)}}</p>
-        <div class="buttons">
+        <p key="desciption" class="description">{{content.overview.substr(0,386)}}</p>
+        <div key="buttons" class="buttons">
           <button class="btn-play">
             <img src="https://img.icons8.com/ios-glyphs/30/000000/play.png" /> PLAY
           </button>
@@ -21,11 +21,13 @@
           <i class="far fa-thumbs-up"></i>
           <i class="far fa-thumbs-up dislike"></i>
         </div>
-        <div>Starring .....</div>
-        <div>Genres ....</div>
+
+        <div key="starring">Starring .....</div>
+        <div key="genres">Genres ....</div>
       </div>
+
       <i @click="closeDetails" class="fas fa-times"></i>
-      <transition name="video_fade">
+      <transition name="picture_fade">
         <img
           class="poster"
           v-if="!this.videoLoaded"
@@ -38,7 +40,7 @@
         id="existing-iframe-example"
         width="640"
         height="360"
-        :src="'https://www.youtube.com/embed/'+this.videoLink+'?autoplay=1&mute=1&enablejsapi=1&showinfo=0&controls=0'"
+        :src="'https://www.youtube.com/embed/'+this.videoLink+'?autoplay=1&mute=1&enablejsapi=1&disablekb=1&loop=1&controls=0&modestbranding=1&playlist='+this.videoLink"
         frameborder="0"
         style="border: solid 4px #37474F"
       ></iframe>
@@ -68,7 +70,7 @@ export default {
       )
         .then(res => res.json())
         .then(data => (this.videoLink = data.results[0].key));
-      console.log(this.videoLink);
+      //console.log(this.videoLink);
     },
     showVideo() {
       setTimeout(() => (this.videoLoaded = true), 1000);

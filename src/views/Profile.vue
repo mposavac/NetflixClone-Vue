@@ -54,7 +54,7 @@ export default {
       this.profiles = profiles;
     },
     hadnleProfileClick(profile_id) {
-      console.log(profile_id);
+      //console.log(profile_id);
       this.$router.push({ name: "browse" });
     }
   }

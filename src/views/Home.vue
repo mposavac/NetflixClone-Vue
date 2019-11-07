@@ -41,7 +41,7 @@ export default {
           .auth()
           .signInWithEmailAndPassword(this.email, this.password)
           .then(response => {
-            console.log(response.user.uid);
+            //console.log(response.user.uid);
             this.addAuth(response.user.uid);
           });
         //console.log(fb.auth().currentUser.uid);
