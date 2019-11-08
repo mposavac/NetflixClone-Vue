@@ -9,7 +9,9 @@ Vue.use(VueRouter);
 
 const isAuthenticated = (to, from, next) => {
   if (store.getters.isAuth) {
-    next();
+    if (to.params.profileId || from.name === 'home' || to.name === 'profile')
+      next();
+    else next({ name: 'profile' });
     return;
   }
   next('/');
@@ -18,18 +20,23 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
-  },
-  {
-    path: '/browse',
-    name: 'browse',
-    component: Browse,
-    beforeEnter: isAuthenticated
+    component: Home,
+    beforeEnter: (to, from, next) => {
+      if (store.getters.isAuth) next({ name: 'profile' });
+      else next();
+    }
   },
   {
     path: '/profile',
     name: 'profile',
     component: Profile,
+    beforeEnter: isAuthenticated
+  },
+  {
+    path: '/browse',
+    name: 'browse',
+    component: Browse,
+    props: true,
     beforeEnter: isAuthenticated
   }
 ];

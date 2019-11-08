@@ -2,7 +2,7 @@
   <div class="list">
     <h2>List Title</h2>
     <div class="wrapper">
-      <div class="slides" :style="shiftStyle()">
+      <div class="slides" :style="'left: '+leftShifting+'vw'">
         <div class="slide" v-for="(slide, slIndex) in slides" :key="slIndex">
           <div
             class="item"
@@ -45,6 +45,8 @@ export default {
       slideIndex: 0,
       shifting: false,
       slided: false,
+      slides: [],
+      leftShifting: null,
       detailsOpen: false,
       detailsContent: []
     };
@@ -62,36 +64,49 @@ export default {
       if (!this.shifting) {
         this.shifting = true;
         setTimeout(() => (this.shifting = false), 500);
+        this.shiftStyle("left");
         if (this.slideIndex === 0) this.slideIndex = this.slides.length - 1;
         else this.slideIndex--;
       }
+      console.log(this.slides);
     },
     next() {
       if (!this.slided) this.slided = true;
       if (!this.shifting) {
         this.shifting = true;
         setTimeout(() => (this.shifting = false), 500);
+        this.shiftStyle("right");
         if (this.slideIndex === this.slides.length - 1) this.slideIndex = 0;
         else this.slideIndex++;
       }
+      console.log(this.slides);
     },
-    shiftStyle() {
-      if (this.slideIndex === 0) return "left: 3%";
-      if (this.slideIndex === 1) return "left: -89%";
-      return "left: -181%";
-    }
-  },
-  computed: {
-    slides: function() {
+    shiftStyle(direction) {
+      if (direction === "right") {
+        if (this.slideIndex === this.slides.length - 1) this.leftShifting = 3;
+        else this.leftShifting -= 92;
+      } else {
+        if (this.slideIndex === 0)
+          this.leftShifting = -(this.slides.length - 1) * 92 + 3;
+        else this.leftShifting += 92;
+      }
+      console.log(this.leftShifting);
+    },
+    defineSlides() {
+      this.leftShifting = 3;
       let n = 0;
-      let chunk = 8;
+      let chunk = Math.floor((window.innerWidth - 80) / 154);
       let array = [];
       while (n < this.temp.length) {
         array.push(this.temp.slice(n, n + chunk));
         n += chunk;
       }
-      return array;
+      this.slides = array;
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.defineSlides);
+    this.defineSlides();
   }
 };
 </script>

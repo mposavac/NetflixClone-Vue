@@ -9,7 +9,7 @@
         src="../assets/logo_video.mp4"
       />
     </transition>
-    <Navbar :scrolling="scrolling" />
+    <Navbar :scrolling="scrolling" :profileId="profileId" />
     <main>
       <Billboard :focus="temp2[RANDOM]" />
       <List :temp="temp2" :index="0" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
@@ -32,6 +32,7 @@ import Footer from "../components/Footer";
 import { mapState } from "vuex";
 export default {
   name: "browse",
+  props: ["profileId"],
   data() {
     return {
       loading: true /*PROMJIENITI U TRUE */,

@@ -12,10 +12,7 @@
           :key="profile.id"
           @click="hadnleProfileClick(profile.id)"
         >
-          <img
-            src="https://occ-0-2774-2773.1.nflxso.net/art/00805/fe465904ae954ab329b5ab1273ef955402b00805.png"
-            alt="profPic"
-          />
+          <img :src="profile.data().picture" alt="profPic" />
           <p>{{profile.data().name}}</p>
         </div>
         <div class="profile">
@@ -30,32 +27,32 @@
 
 <script>
 import firebase, { fs } from "../config/fbconfig";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "profile",
-  data() {
-    return {
-      profiles: []
-    };
+  computed: {
+    ...mapState(["profiles", "isAuth"])
   },
   mounted() {
     this.getProfiles();
   },
   methods: {
+    ...mapActions(["addProfiles"]),
     async getProfiles() {
       let profiles = [];
       let snapshot = await fs
         .collection("users")
-        .doc(firebase.auth().currentUser.uid)
+        .doc(this.isAuth)
         .collection("profiles")
         .get();
       snapshot.forEach(doc => {
         profiles.push(doc);
       });
-      this.profiles = profiles;
+      this.addProfiles(profiles);
     },
     hadnleProfileClick(profile_id) {
       //console.log(profile_id);
-      this.$router.push({ name: "browse" });
+      this.$router.push({ name: "browse", params: { profileId: profile_id } });
     }
   }
 };

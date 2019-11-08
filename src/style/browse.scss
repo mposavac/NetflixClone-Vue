@@ -32,6 +32,113 @@ html {
       color: white;
       font-size: 1rem;
     }
+    .nav-right-side {
+      position: absolute;
+      height: 100%;
+      right: 4%;
+      top: 0;
+      display: flex;
+      align-items: center;
+      img {
+        height: 32px;
+        width: 32px;
+      }
+      .search-field {
+        transition: 0.5s;
+        i {
+          padding: 0 0.75vw;
+        }
+        input {
+          width: 0;
+          color: white;
+          height: 32px;
+          border: none;
+          background: none;
+          outline: none;
+          transition: 0.5s;
+        }
+        &.active {
+          border: 1px solid white;
+          background: black;
+          input {
+            width: 250px;
+          }
+        }
+      }
+      .menu {
+        position: relative;
+        width: 80px;
+        .profile-active {
+          display: flex;
+          min-width: 60px;
+          margin-left: 1.5vw;
+        }
+        .profiles-dropdown {
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          transition: 0.3s;
+          transition-delay: 0.3s;
+          width: 225%;
+          top: 100%;
+          left: -125%;
+          margin-top: 2vw;
+          background: color(black);
+          text-align: left;
+
+          .profiles {
+            padding: 0.75vw;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            .profile {
+              display: block;
+              margin-top: 0.25em;
+              cursor: pointer;
+              img,
+              p {
+                display: inline-block;
+                line-height: 32px;
+                vertical-align: middle;
+              }
+              &:hover p {
+                text-decoration: underline;
+              }
+            }
+            p {
+              margin-top: 0.8em;
+              margin-left: 6px;
+              font-size: 0.8em;
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+          .settings {
+            font-weight: bolder;
+            padding: 0.75vw 0.75vw 1.5vw 0.75vw;
+            p {
+              margin-left: 6px;
+              margin-top: 0.5em;
+              font-size: 0.8em;
+              &:first-child {
+                margin-top: 0;
+              }
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+        &:hover .profiles-dropdown {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      i,
+      p {
+        cursor: pointer;
+        color: white;
+      }
+    }
   }
 
   video {
@@ -151,9 +258,16 @@ html {
         display: flex;
         position: relative;
         top: 0;
-        left: 3%;
         width: 10000px;
         transition: 0.5s;
+        .slide {
+          width: calc(100vw - 105px);
+          display: flex;
+          justify-content: space-around;
+          &:last-child {
+            justify-content: start;
+          }
+        }
         .item {
           display: inline;
           margin-left: 0.1em;

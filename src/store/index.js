@@ -819,7 +819,8 @@ export default new Vuex.Store({
         "release_date": "2019-08-09"
       }
     ],
-    isAuth: false
+    profiles: [],
+    isAuth: localStorage.userId ? localStorage.userId : false
     
   },
   getters:{
@@ -829,11 +830,17 @@ export default new Vuex.Store({
   mutations: {
     addAuth:(state, payload)=>{
       state.isAuth=payload;
+    },
+    addProfiles: (state, payload)=>{
+      state.profiles=payload;
     }
   },
   actions: {
     addAuth:({commit}, payload)=>{
       commit("addAuth", payload);
+    },
+    addProfiles:({commit}, payload)=>{
+      commit("addProfiles", payload)
     }
   },
   modules: {

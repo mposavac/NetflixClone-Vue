@@ -43,6 +43,7 @@ export default {
           .then(response => {
             //console.log(response.user.uid);
             this.addAuth(response.user.uid);
+            localStorage.userId = response.user.uid;
           });
         //console.log(fb.auth().currentUser.uid);
       }
