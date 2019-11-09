@@ -21,9 +21,6 @@
           <i class="far fa-thumbs-up"></i>
           <i class="far fa-thumbs-up dislike"></i>
         </div>
-
-        <div key="starring">Starring .....</div>
-        <div key="genres">Genres ....</div>
       </div>
 
       <i @click="closeDetails" class="fas fa-times"></i>
@@ -37,12 +34,12 @@
       </transition>
       <iframe
         @load="this.showVideo"
-        id="existing-iframe-example"
         width="640"
         height="360"
         :src="'https://www.youtube.com/embed/'+this.videoLink+'?autoplay=1&mute=1&enablejsapi=1&disablekb=1&loop=1&controls=0&modestbranding=1&playlist='+this.videoLink"
         frameborder="0"
         style="border: solid 4px #37474F"
+        allow="geolocation"
       ></iframe>
     </div>
   </div>
@@ -66,14 +63,15 @@ export default {
     async fetchVideo() {
       this.videoLoaded = false;
       await fetch(
-        `https://api.themoviedb.org/3/movie/${this.content.id}/videos?api_key=5c9b7f26ee7ebb9e910bf1ec551bf09b&language=en-US`
+        `https://api.themoviedb.org/3/${this.content.name ? "tv" : "movie"}/${
+          this.content.id
+        }/videos?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=en-US`
       )
         .then(res => res.json())
         .then(data => (this.videoLink = data.results[0].key));
-      //console.log(this.videoLink);
     },
     showVideo() {
-      setTimeout(() => (this.videoLoaded = true), 1000);
+      setTimeout(() => (this.videoLoaded = true), 2500);
     },
     videoEnded() {
       console.log("ENDED");

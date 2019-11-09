@@ -42,15 +42,14 @@
 </template>
 
 <script>
-//JOŠ DODATI I SERACH BAR ITD... OVISNO STA CE SE POKATIVATI
 import { mapActions, mapState } from "vuex";
+import firebase from "../config/fbconfig";
 export default {
   props: ["scrolling", "profileId"],
   data() {
     return {
       search: "",
       searching: false
-      //profilesToShow: this.getProfiles()
     };
   },
   computed: {
@@ -59,29 +58,17 @@ export default {
       return this.profiles.filter(element => element.id === this.profileId);
     }
   },
-  mounted() {
-    console.log("Profiles", this.profiles);
-    console.log("props", this.activeProfile);
-  },
   methods: {
     ...mapActions(["addAuth"]),
     signOut() {
       localStorage.clear();
+      firebase.auth().signOut();
       this.addAuth(false);
       this.$router.push({ name: "home" });
     },
     isSearching() {
       this.searching = !this.searching;
-    } /*
-    getProfiles() {
-      let array = [];
-      for (profile of this.profiles) {
-        if (profile.id !== this.profileId) {
-          array.push(profile);
-        }
-      }
-      return array;
-    }*/
+    }
   }
 };
 </script>

@@ -14,6 +14,7 @@ var firebaseConfig = {
   measurementId: 'G-1RT42ST1NJ'
 };
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
 export const fs = firebase.firestore();
 export default firebase;

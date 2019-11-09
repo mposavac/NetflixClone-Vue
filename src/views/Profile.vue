@@ -35,9 +35,10 @@ export default {
   },
   mounted() {
     this.getProfiles();
+    this.fetchLists();
   },
   methods: {
-    ...mapActions(["addProfiles"]),
+    ...mapActions(["addProfiles", "fetchLists"]),
     async getProfiles() {
       let profiles = [];
       let snapshot = await fs

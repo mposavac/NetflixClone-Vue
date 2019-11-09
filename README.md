@@ -1,5 +1,11 @@
 # Netflix Clone
 
-### Customize configuration
+Netflix clone made in Vue.js
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Demo is available _[HERE](https://netflix-clone-vue.web.app 'Netflix Clone')._
+
+### Todo
+
+- Mobile
+- Sign Up
+- Favourites

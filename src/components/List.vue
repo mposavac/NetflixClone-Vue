@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <div :class="bigList ? 'list netflix-originals' : 'list'">
     <h2>List Title</h2>
     <div class="wrapper">
       <div class="slides" :style="'left: '+leftShifting+'vw'">
@@ -10,7 +10,10 @@
             :key="index"
             @click="handleDetails(index)"
           >
-            <img :src="'http://image.tmdb.org/t/p/w154'+movie.poster_path" alt="NoPoster" />
+            <img
+              :src="movie.poster_path ?  (`http://image.tmdb.org/t/p/${bigList ? 'w300':'w154'}`+movie.poster_path ):'https://yt3.ggpht.com/a/AGF-l7_XQ2zk0B1EgO1rElgbqLt_zR2_JN8uQB3yow=s900-c-k-c0xffffffff-no-rj-mo'"
+              alt="NoPoster"
+            />
           </div>
         </div>
       </div>
@@ -36,7 +39,7 @@
 <script>
 import Details from "./Details";
 export default {
-  props: ["temp", "selected", "index", "changeIndex"],
+  props: ["temp", "selected", "index", "changeIndex", "bigList"],
   components: {
     Details
   },
@@ -84,18 +87,20 @@ export default {
     shiftStyle(direction) {
       if (direction === "right") {
         if (this.slideIndex === this.slides.length - 1) this.leftShifting = 3;
-        else this.leftShifting -= 92;
+        else this.leftShifting -= 93;
       } else {
         if (this.slideIndex === 0)
-          this.leftShifting = -(this.slides.length - 1) * 92 + 3;
-        else this.leftShifting += 92;
+          this.leftShifting = -(this.slides.length - 1) * 93 + 3;
+        else this.leftShifting += 93;
       }
       console.log(this.leftShifting);
     },
     defineSlides() {
+      let divider = 154;
+      if (this.bigList) divider = 240;
       this.leftShifting = 3;
       let n = 0;
-      let chunk = Math.floor((window.innerWidth - 80) / 154);
+      let chunk = Math.floor((window.innerWidth - 80) / divider);
       let array = [];
       while (n < this.temp.length) {
         array.push(this.temp.slice(n, n + chunk));

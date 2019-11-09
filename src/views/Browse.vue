@@ -11,13 +11,24 @@
     </transition>
     <Navbar :scrolling="scrolling" :profileId="profileId" />
     <main>
-      <Billboard :focus="temp2[RANDOM]" />
-      <List :temp="temp2" :index="0" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="temp2" :index="1" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="temp2" :index="2" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="temp2" :index="3" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="temp2" :index="4" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="temp2" :index="5" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
+      <Billboard :focus="netflixOriginal[RANDOM]" />
+      <List :temp="tv" :index="0" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
+      <List :temp="movie" :index="1" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
+      <List
+        :temp="netflixOriginal"
+        :index="2"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+        bigList="true"
+      />
+      <List :temp="tv" :index="3" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
+      <List :temp="movie" :index="4" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
+      <List
+        :temp="netflixOriginal"
+        :index="5"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+      />
     </main>
     <Footer />
   </div>
@@ -35,7 +46,7 @@ export default {
   props: ["profileId"],
   data() {
     return {
-      loading: true /*PROMJIENITI U TRUE */,
+      loading: true,
       scrolling: false,
       selectedIndex: null,
       RANDOM: Math.floor(Math.random() * 20) //MAKNUTI NA KRAJU
@@ -48,12 +59,11 @@ export default {
     Footer
   },
   computed: {
-    ...mapState(["temp", "temp2"])
+    ...mapState(["movie", "tv", "netflixOriginal"])
   },
   mounted() {
     setTimeout(() => (this.loading = false), 5500);
     document.addEventListener("scroll", this.handleScroll);
-    console.log(this.temp2);
   },
   methods: {
     handleScroll() {
