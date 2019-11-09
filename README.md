@@ -2,7 +2,7 @@
 
 Netflix clone made in Vue.js
 
-Demo is available _[HERE](https://netflix-clone-vue.web.app 'Netflix Clone')._
+Demo is available _[HERE](https://netflixclone-vue.firebaseapp.com/ 'Netflix Clone')._
 
 ### Todo
 
