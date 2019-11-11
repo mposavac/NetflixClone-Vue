@@ -1,11 +1,11 @@
 <template>
   <div :class="scrolling ? 'nav scroll' : 'nav'">
     <img src="../assets/logo.png" alt srcset />
-    <p>Home</p>
-    <p>Tv Shows</p>
-    <p>Movies</p>
-    <p>Recently Added</p>
-    <p>My List</p>
+    <p class="categories">Home</p>
+    <p class="categories">Tv Shows</p>
+    <p class="categories">Movies</p>
+    <p class="categories">Recently Added</p>
+    <p class="categories">My List</p>
 
     <div class="nav-right-side">
       <div :class="searching ? 'search-field active': 'search-field'">

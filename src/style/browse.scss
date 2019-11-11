@@ -31,6 +31,11 @@ html {
       margin-right: 1rem;
       color: white;
       font-size: 1rem;
+      &.categories {
+        @include tablet {
+          display: none;
+        }
+      }
     }
     .nav-right-side {
       position: absolute;
@@ -61,7 +66,7 @@ html {
           border: 1px solid white;
           background: black;
           input {
-            width: 250px;
+            width: 200px;
           }
         }
       }
@@ -157,6 +162,9 @@ html {
     height: 100vh;
     width: 100%;
     overflow: hidden;
+    @include tablet {
+      height: 50vh;
+    }
     img.poster {
       position: relative;
       z-index: 1;
@@ -192,9 +200,15 @@ html {
         rgba(0, 0, 0, 0.8) 10%,
         transparent
       );
+      @include tablet {
+        width: 80%;
+      }
       h1 {
         color: white;
         font-size: 4.5vw;
+        @include tablet {
+          font-size: 16px;
+        }
       }
       p {
         margin-top: 1rem;
@@ -202,6 +216,9 @@ html {
         font-size: 1.4vw;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0);
         width: 80%;
+        @include tablet {
+          font-size: 12px;
+        }
       }
       .buttons {
         margin: 2.5vw 0 7vw 0;
@@ -214,11 +231,20 @@ html {
           color: white;
           outline: none;
           cursor: pointer;
+          @include tablet {
+            padding: 0.5em 1em;
+            font-size: 12px;
+          }
+
           img {
             filter: invert(1);
             height: 15px;
             width: 15px;
             margin-right: 6px;
+            @include tablet {
+              height: 12px;
+              width: 12px;
+            }
           }
           i {
             margin-right: 6px;
@@ -234,19 +260,31 @@ html {
     overflow: hidden;
     margin-top: 1rem;
     h2 {
+      font-size: 1.5em;
       color: white;
       margin-left: 4%;
+      @include tablet {
+        font-size: 16px;
+        margin-left: 5vw;
+      }
     }
     div.arrow-div {
       position: absolute;
       top: calc(1.5em + 14px);
       background: rgba(0, 0, 0, 0.6);
       height: 230px;
-      width: 2.5rem;
+      width: 2.5em;
       overflow: hidden;
       opacity: 0;
       transition: 0.5s;
       cursor: pointer;
+      @include tablet {
+        width: 5vw;
+        height: calc(100% - 16px - 14px);
+        max-height: 150px;
+        top: calc(16px + 10px);
+        opacity: 1 !important;
+      }
       &.right {
         right: 0;
         img {
@@ -264,6 +302,10 @@ html {
         position: absolute;
         top: calc(50% - 25px);
         filter: invert(1);
+        @include tablet {
+          width: 7vw;
+          top: calc(50% - 3.5vw);
+        }
       }
     }
     .wrapper {
@@ -278,23 +320,38 @@ html {
         width: 10000px;
         transition: 0.5s;
         .slide {
-          width: calc(100vw - 105px);
+          width: calc(100vw - 5em - 17px);
           display: flex;
           justify-content: space-around;
           &:last-child {
             justify-content: start;
+          }
+          @include tablet {
+            width: calc(90vw - 17px);
+          }
+          &:first-child {
+            margin-left: 40px;
+            @include tablet {
+              margin-left: 5vw;
+            }
           }
         }
         .item {
           display: inline;
           margin-left: 0.1em;
           cursor: pointer;
-
+          @include tablet {
+            max-width: 30%;
+          }
           img {
-            width: 154px;
+            width: 100%;
+            max-width: 154px;
             min-height: 230px;
             transition: 0.25s;
             object-fit: cover;
+            @include tablet {
+              min-height: 100%;
+            }
           }
           &:hover {
             img {
@@ -315,15 +372,24 @@ html {
     }
     &.netflix-originals {
       div.arrow-div {
-        height: 450px;
+        top: calc(16px + 13px);
+        height: 460px;
+        @include tablet {
+          max-height: 320px;
+        }
       }
       .wrapper {
-        height: 460px;
+        //height: 460px;
         .item {
-          width: 20%;
+          @include tablet {
+            max-width: 50%;
+          }
           img {
-            width: 240px !important;
+            max-width: 240px;
             min-height: 450px;
+            @include tablet {
+              min-height: 320px;
+            }
           }
           &:hover {
             img {
@@ -341,6 +407,9 @@ html {
     width: 100%;
     position: relative;
     overflow: hidden;
+    @include tablet {
+      height: 35vh;
+    }
     .text-wrapper {
       color: color(gray);
       position: relative;
@@ -348,10 +417,13 @@ html {
       width: 47%;
       z-index: 10;
       margin-left: 4%;
-      padding-top: 2.5rem;
+      padding-top: 2.5em;
       padding-right: 12%;
       background: linear-gradient(to right, black 60%, transparent);
-
+      @include tablet {
+        padding-top: 1em;
+        width: 70%;
+      }
       h1,
       div,
       p.description {
@@ -361,15 +433,25 @@ html {
       }
       h1 {
         font-size: 3vw;
-        margin-bottom: 1rem;
+        margin-bottom: 1em;
+        @include tablet {
+          font-size: 16px;
+          margin-bottom: 0;
+        }
       }
       .basic-info {
-        margin: 0.5rem 0;
+        margin: 0.5em 0;
+        @include tablet {
+          margin: 0.15em 0;
+        }
         p {
           font-size: 1vw;
           display: inline;
-          margin-right: 1.2rem;
+          margin-right: 1.2em;
           font-weight: bold;
+          @include tablet {
+            font-size: 10px;
+          }
         }
         .match {
           color: color(green);
@@ -379,19 +461,25 @@ html {
         }
         .adult {
           color: white;
-          padding: 0.25rem 0.5rem;
+          padding: 0.25em 0.5em;
           border: color(gray) 1px solid;
         }
       }
       .description {
         margin-top: 1.5rem;
         font-size: 1.2vw;
+        @include tablet {
+          margin-top: 0.25em;
+          font-size: 10px;
+        }
       }
       .buttons {
         display: flex;
         align-items: center;
         margin: 1.5rem 0;
-
+        @include tablet {
+          display: none;
+        }
         button,
         i.fa-thumbs-up {
           margin-right: 0.75rem;
@@ -467,14 +555,17 @@ html {
 
   footer {
     width: 65%;
-    margin: 3.5rem auto 0 auto;
+    margin: 3.5em auto 0 auto;
     text-align: left;
     color: color(gray);
+    @include tablet {
+      width: 95%;
+    }
     section {
-      margin: 1rem auto;
+      margin: 1em auto;
       &.social i {
-        font-size: 2rem;
-        margin-right: 1.5rem;
+        font-size: 2em;
+        margin-right: 1.5em;
       }
       &.links {
         display: flex;
@@ -482,13 +573,13 @@ html {
         div {
           flex: 1;
           p {
-            margin: 0.75rem 0;
-            font-size: 0.8rem;
+            margin: 0.75em 0;
+            font-size: 0.8em;
           }
         }
       }
       &.disclaimer {
-        margin: 1rem 0;
+        margin: 1em 0;
         p {
           display: inline;
         }
@@ -503,14 +594,20 @@ html {
       }
     }
     button {
-      padding: 0.4rem;
+      padding: 0.4em;
       border: 1px color(gray) solid;
       color: color(gray);
       background: none;
       outline: none;
     }
     p.copyrights {
-      padding-bottom: 1rem;
+      padding-bottom: 1em;
+    }
+  }
+
+  iframe {
+    @include tablet {
+      pointer-events: unset !important;
     }
   }
 }

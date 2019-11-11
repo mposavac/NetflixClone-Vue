@@ -12,19 +12,45 @@
     <Navbar :scrolling="scrolling" :profileId="profileId" />
     <main>
       <Billboard :focus="netflixOriginal[RANDOM]" />
-      <List :temp="tv" :index="0" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="movie" :index="1" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
       <List
-        :temp="netflixOriginal"
+        listTitle="Tv shows"
+        :content="tv"
+        :index="0"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+      />
+      <List
+        listTitle="New Movies"
+        :content="movie"
+        :index="1"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+      />
+      <List
+        listTitle="Netflix Originals"
+        :content="netflixOriginal"
         :index="2"
         :selected="selectedIndex"
         :changeIndex="changeDetailsIndex"
         bigList="true"
       />
-      <List :temp="tv" :index="3" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
-      <List :temp="movie" :index="4" :selected="selectedIndex" :changeIndex="changeDetailsIndex" />
       <List
-        :temp="netflixOriginal"
+        listTitle="Just for you"
+        :content="tv"
+        :index="3"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+      />
+      <List
+        listTitle="Recently Added"
+        :content="movie"
+        :index="4"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+      />
+      <List
+        listTitle="Leaving Soon"
+        :content="netflixOriginal"
         :index="5"
         :selected="selectedIndex"
         :changeIndex="changeDetailsIndex"

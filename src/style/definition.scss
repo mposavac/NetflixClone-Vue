@@ -10,6 +10,13 @@ $colors: (
   @return map-get($colors, $color-name);
 }
 
+$tablet: 750px;
+
+@mixin tablet {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
 * {
   margin: 0;
   padding: 0;

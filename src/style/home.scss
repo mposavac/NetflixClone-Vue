@@ -43,7 +43,11 @@ div.account {
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    padding: 2rem 4rem;
+    padding: 2em 4em;
+    @include tablet {
+      width: unset;
+      padding: 2em 0.5rem;
+    }
     h1 {
       text-align: left;
       color: white;

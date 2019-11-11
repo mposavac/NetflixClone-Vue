@@ -23,10 +23,17 @@
     width: 50%;
     max-width: 60%;
     min-height: 12vw;
+    @include tablet {
+      width: 80%;
+      max-width: 80%;
+    }
     h1 {
       font-size: 3.5vw;
       font-weight: 100;
       color: white;
+      @include tablet {
+        font-size: 16px;
+      }
     }
     .profiles-wrapper {
       margin-top: 2vw;
@@ -34,9 +41,16 @@
       display: flex;
       flex-direction: row;
       justify-content: space-around;
+      @include tablet {
+        display: block;
+      }
       .profile {
         cursor: pointer;
         animation: profileEnter 0.5s ease forwards;
+        @include tablet {
+          display: inline-block;
+          margin: 0.5vw 2vw 0 0;
+        }
         img,
         i {
           height: 10vw;
@@ -46,15 +60,24 @@
         }
         img {
           border: color(gray) 4px solid;
+          @include tablet {
+            border: none;
+          }
         }
         i {
           vertical-align: middle;
           line-height: 10vw;
-          font-size: 6em;
+          font-size: 10vw;
+          @include tablet {
+            line-height: 84px;
+          }
         }
         p {
           margin-top: 1vw;
           font-size: 1.3vw;
+          @include tablet {
+            font-size: 12px;
+          }
         }
         &:hover {
           img {

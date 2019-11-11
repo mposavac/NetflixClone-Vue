@@ -36,6 +36,11 @@
       </p>
       <img src="../assets/symbol.png" alt="noLogo" />
       <br />
+      <p>
+        Movie and Tv data by
+        <a href="https://www.themoviedb.org/">The Movie DB</a>
+      </p>
+      <br />
       <a href="https://icons8.com/icon/115823/expand-arrow">Icons by Icons8.com</a>
     </section>
 

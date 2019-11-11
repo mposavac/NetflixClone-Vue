@@ -1,8 +1,13 @@
 <template>
   <div :class="bigList ? 'list netflix-originals' : 'list'">
-    <h2>List Title</h2>
+    <h2>{{listTitle}}</h2>
     <div class="wrapper">
-      <div class="slides" :style="'left: '+leftShifting+'vw'">
+      <div
+        class="slides"
+        v-touch:swipe.left="next"
+        v-touch:swipe.right="prev"
+        :style="shiftStyling()"
+      >
         <div class="slide" v-for="(slide, slIndex) in slides" :key="slIndex">
           <div
             class="item"
@@ -39,7 +44,14 @@
 <script>
 import Details from "./Details";
 export default {
-  props: ["temp", "selected", "index", "changeIndex", "bigList"],
+  props: [
+    "content",
+    "selected",
+    "index",
+    "changeIndex",
+    "bigList",
+    "listTitle"
+  ],
   components: {
     Details
   },
@@ -49,7 +61,7 @@ export default {
       shifting: false,
       slided: false,
       slides: [],
-      leftShifting: null,
+      mobile: false,
       detailsOpen: false,
       detailsContent: []
     };
@@ -67,50 +79,61 @@ export default {
       if (!this.shifting) {
         this.shifting = true;
         setTimeout(() => (this.shifting = false), 500);
-        this.shiftStyle("left");
         if (this.slideIndex === 0) this.slideIndex = this.slides.length - 1;
         else this.slideIndex--;
       }
-      console.log(this.slides);
     },
     next() {
       if (!this.slided) this.slided = true;
       if (!this.shifting) {
         this.shifting = true;
         setTimeout(() => (this.shifting = false), 500);
-        this.shiftStyle("right");
         if (this.slideIndex === this.slides.length - 1) this.slideIndex = 0;
         else this.slideIndex++;
       }
-      console.log(this.slides);
-    },
-    shiftStyle(direction) {
-      if (direction === "right") {
-        if (this.slideIndex === this.slides.length - 1) this.leftShifting = 3;
-        else this.leftShifting -= 93;
-      } else {
-        if (this.slideIndex === 0)
-          this.leftShifting = -(this.slides.length - 1) * 93 + 3;
-        else this.leftShifting += 93;
-      }
-      console.log(this.leftShifting);
     },
     defineSlides() {
       let divider = 154;
       if (this.bigList) divider = 240;
-      this.leftShifting = 3;
+      if (window.innerWidth < 750 && !this.bigList) divider = 154 / 2;
+      if (window.innerWidth < 750 && this.bigList) divider = 154 - 17;
+      this.leftShifting = 40;
       let n = 0;
       let chunk = Math.floor((window.innerWidth - 80) / divider);
       let array = [];
-      while (n < this.temp.length) {
-        array.push(this.temp.slice(n, n + chunk));
+      while (n < this.content.length) {
+        array.push(this.content.slice(n, n + chunk));
         n += chunk;
       }
       this.slides = array;
+    },
+    shiftStyling() {
+      if (!this.mobile)
+        return (
+          "left: calc(" +
+          this.slideIndex * 97 +
+          "px - " +
+          this.slideIndex * 100 +
+          "vw)"
+        );
+      else
+        return (
+          "left: calc(" +
+          (this.slideIndex > 1 ? this.slideIndex - 2 : 0) +
+          "px + " +
+          this.slideIndex * 17 +
+          "px - " +
+          this.slideIndex * 90 +
+          "vw)"
+        );
+    },
+    mobileShifting() {
+      console.log("SHIF");
     }
   },
   mounted() {
     window.addEventListener("resize", this.defineSlides);
+    if (window.innerWidth < 750) this.mobile = true;
     this.defineSlides();
   }
 };
