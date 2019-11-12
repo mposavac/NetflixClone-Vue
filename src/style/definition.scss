@@ -11,9 +11,16 @@ $colors: (
 }
 
 $tablet: 750px;
+$mobile: 400px;
 
 @mixin tablet {
   @media (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: $mobile) {
     @content;
   }
 }

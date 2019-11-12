@@ -3,11 +3,12 @@
     <transition name="picture_fade">
       <img
         class="poster"
-        v-if="!this.videoLoaded"
-        :src="'http://image.tmdb.org/t/p/original/'+focus.backdrop_path"
+        v-if="!this.videoLoaded || !this.videoLink"
+        :src="focus.backdrop_path ? 'http://image.tmdb.org/t/p/original/'+focus.backdrop_path : '/img/logo.dcc40947.png'"
         alt="noPoster"
       />
     </transition>
+
     <iframe
       v-if="videoLink"
       @load="this.showVideo"
@@ -38,7 +39,7 @@
 
 <script>
 export default {
-  props: ["focus"],
+  props: ['focus'],
   data() {
     return {
       videoLoaded: false,
@@ -53,7 +54,7 @@ export default {
   methods: {
     async fetchVideo() {
       await fetch(
-        `https://api.themoviedb.org/3/${this.focus.name ? "tv" : "movie"}/${
+        `https://api.themoviedb.org/3/${this.focus.name ? 'tv' : 'movie'}/${
           this.focus.id
         }/videos?api_key=${process.env.VUE_APP_TMDB_API_KEY}&language=en-US`
       )

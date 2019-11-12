@@ -24,11 +24,16 @@
         </div>
         <div class="profiles-dropdown">
           <div class="profiles">
-            <div class="profile" v-for="profile in profiles" :key="profile.id">
+            <div
+              class="profile"
+              v-for="profile in profiles"
+              :key="profile.id"
+              @click="switchProfiles(profile.id)"
+            >
               <img :src="profile.data().picture" alt="profilePic" />
               <p>{{profile.data().name}}</p>
             </div>
-            <p>Manage Profiles</p>
+            <p @click="switchProfiles(undefined)">Manage Profiles</p>
           </div>
           <div class="settings">
             <p>Account</p>
@@ -68,6 +73,12 @@ export default {
     },
     isSearching() {
       this.searching = !this.searching;
+    },
+    switchProfiles(profileId) {
+      this.$router.push({
+        name: "profile",
+        params: { switchingProfiles: profileId }
+      });
     }
   }
 };

@@ -7,5 +7,4 @@ Demo is available _[HERE](https://netflixclone-vue.firebaseapp.com/ 'Netflix Clo
 ### Todo
 
 - Mobile
-- Sign Up
 - Favourites

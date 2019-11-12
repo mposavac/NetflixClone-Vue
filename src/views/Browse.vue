@@ -61,21 +61,21 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar";
-import Billboard from "../components/Billboard";
-import List from "../components/List";
-import Footer from "../components/Footer";
+import Navbar from '../components/Navbar';
+import Billboard from '../components/Billboard';
+import List from '../components/List';
+import Footer from '../components/Footer';
 
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 export default {
-  name: "browse",
-  props: ["profileId"],
+  name: 'browse',
+  props: ['profileId'],
   data() {
     return {
       loading: true,
       scrolling: false,
       selectedIndex: null,
-      RANDOM: Math.floor(Math.random() * 20) //MAKNUTI NA KRAJU
+      RANDOM: Math.floor(Math.random() * 20)
     };
   },
   components: {
@@ -85,11 +85,11 @@ export default {
     Footer
   },
   computed: {
-    ...mapState(["movie", "tv", "netflixOriginal"])
+    ...mapState(['movie', 'tv', 'netflixOriginal'])
   },
   mounted() {
     setTimeout(() => (this.loading = false), 5500);
-    document.addEventListener("scroll", this.handleScroll);
+    document.addEventListener('scroll', this.handleScroll);
   },
   methods: {
     handleScroll() {

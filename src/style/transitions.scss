@@ -31,6 +31,9 @@
 .details-text-enter-active {
   animation: slideIn 0.5s forwards;
 }
+.details-text-leave-to {
+  animation: slideIn 0.5s reverse;
+}
 
 @keyframes slideIn {
   from {

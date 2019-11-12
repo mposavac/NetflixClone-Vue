@@ -30,6 +30,7 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: Profile,
+    props: true,
     beforeEnter: isAuthenticated
   },
   {
