@@ -16,19 +16,19 @@
             @click="handleDetails(index)"
           >
             <img
-              :src="movie.poster_path ?  (`http://image.tmdb.org/t/p/${bigList ? 'w300':'w154'}`+movie.poster_path ):'https://yt3.ggpht.com/a/AGF-l7_XQ2zk0B1EgO1rElgbqLt_zR2_JN8uQB3yow=s900-c-k-c0xffffffff-no-rj-mo'"
+              :src="movie.poster_path ?  (`https://image.tmdb.org/t/p/${bigList ? 'w300':'w154'}`+movie.poster_path ):'https://yt3.ggpht.com/a/AGF-l7_XQ2zk0B1EgO1rElgbqLt_zR2_JN8uQB3yow=s900-c-k-c0xffffffff-no-rj-mo'"
               alt="NoPoster"
             />
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="arrow-div right" @click="next">
-      <img class="arrow" src="https://img.icons8.com/carbon-copy/50/000000/expand-arrow.png" />
-    </div>
-    <div :class="slided ? 'arrow-div left' : 'arrow-div left hidden'" @click="prev">
-      <img class="arrow" src="https://img.icons8.com/carbon-copy/50/000000/expand-arrow.png" />
+      <div class="arrow-div right" @click="next">
+        <i class="fas fa-angle-down arrow"></i>
+      </div>
+      <div :class="slided ? 'arrow-div left' : 'arrow-div left hidden'" @click="prev">
+        <i class="fas fa-angle-down arrow"></i>
+      </div>
     </div>
 
     <transition name="details">
@@ -65,6 +65,9 @@ export default {
       detailsOpen: false,
       detailsContent: []
     };
+  },
+  watch: {
+    content: "defineSlides"
   },
   methods: {
     handleDetails(index) {
@@ -126,9 +129,6 @@ export default {
           this.slideIndex * 90 +
           "vw)"
         );
-    },
-    mobileShifting() {
-      console.log("SHIF");
     }
   },
   mounted() {

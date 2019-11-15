@@ -41,7 +41,7 @@
         <a href="https://www.themoviedb.org/">The Movie DB</a>
       </p>
       <br />
-      <a href="https://icons8.com/icon/115823/expand-arrow">Icons by Icons8.com</a>
+      <a href="https://fontawesome.com/">Icons by Font Awesome</a>
     </section>
 
     <p class="copyrights">Matej Posavac, {{new Date().getFullYear()}}</p>

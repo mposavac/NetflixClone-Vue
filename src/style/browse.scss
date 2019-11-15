@@ -1,4 +1,4 @@
-@import './definition.scss';
+@import "./definition.scss";
 
 html {
   background: color(black);
@@ -270,9 +270,9 @@ html {
     }
     div.arrow-div {
       position: absolute;
-      top: calc(1.5em + 14px);
+      top: 10px;
       background: rgba(0, 0, 0, 0.6);
-      height: 230px;
+      height: calc(100% - 10px);
       width: 2.5em;
       overflow: hidden;
       opacity: 0;
@@ -280,31 +280,34 @@ html {
       cursor: pointer;
       @include tablet {
         width: 5vw;
-        height: calc(100% - 16px - 14px);
-        max-height: 150px;
-        top: calc(16px + 10px);
         opacity: 1 !important;
       }
       &.right {
         right: 0;
-        img {
-          transform: rotateZ(-90deg) translateY(-5px);
+        i {
+          transform: rotateZ(-90deg) translate(50%, 10px);
+          @include tablet {
+            transform: rotateZ(-90deg) translate(calc(-50% + 10px), 8px);
+          }
         }
       }
       &.left {
         left: 0;
-        img {
-          transform: rotateZ(90deg) translateY(5px);
+        i {
+          transform: rotateZ(90deg) translate(-50%, -6px);
+          @include tablet {
+            transform: rotateZ(90deg) translate(-50%, -1.25vw);
+          }
         }
       }
 
-      img {
+      i.arrow {
         position: absolute;
-        top: calc(50% - 25px);
-        filter: invert(1);
+        top: 50%;
+        font-size: 2.5vw;
+        color: white;
         @include tablet {
-          width: 7vw;
-          top: calc(50% - 3.5vw);
+          font-size: 16px;
         }
       }
     }
@@ -325,6 +328,9 @@ html {
           justify-content: space-around;
           &:last-child {
             justify-content: start;
+            .item:not(:first-child) {
+              margin-left: 1vw;
+            }
           }
           @include tablet {
             width: calc(90vw - 17px);
@@ -340,6 +346,7 @@ html {
           display: inline;
           margin-left: 0.1em;
           cursor: pointer;
+          animation: slideIn 0.5s forwards ease;
           @include tablet {
             max-width: 30%;
           }
@@ -347,6 +354,7 @@ html {
             width: 100%;
             max-width: 154px;
             min-height: 230px;
+            height: 100%;
             transition: 0.25s;
             object-fit: cover;
             @include tablet {
@@ -358,7 +366,6 @@ html {
               transform: scale(1.15);
             }
           }
-          //touch-action: pan-x; //STA GOD OVO JE
         }
       }
     }
@@ -371,13 +378,6 @@ html {
       }
     }
     &.netflix-originals {
-      div.arrow-div {
-        top: calc(16px + 13px);
-        height: 460px;
-        @include tablet {
-          max-height: 320px;
-        }
-      }
       .wrapper {
         .item {
           @include tablet {
@@ -485,13 +485,15 @@ html {
         }
         button {
           color: white;
-          font: 1.2vw;
+          font-size: 0.9vw;
           font-weight: bold;
           padding: 0.75em 1.5em;
           border: none;
           outline: none;
+          cursor: pointer;
           &.btn-play {
             background: color(red);
+
             img {
               filter: invert(1);
               height: 20px;
@@ -529,6 +531,9 @@ html {
       font-size: 1.7vw;
       color: rgba(255, 255, 255, 0.6);
       cursor: pointer;
+      @include tablet {
+        font-size: 12px;
+      }
     }
     img.poster {
       position: absolute;

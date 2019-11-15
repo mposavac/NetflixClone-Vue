@@ -15,8 +15,10 @@
           <button class="btn-play">
             <img src="https://img.icons8.com/ios-glyphs/30/000000/play.png" /> PLAY
           </button>
-          <button class="btn-list">
-            <i class="fas fa-plus" /> MY LIST
+          <button class="btn-list" @click="isFavourite ? removeFromList() : addToList()">
+            <i v-if="isFavourite" class="fas fa-minus" />
+            <i v-else class="fas fa-plus" />
+            {{isFavourite ? "REMOVE":"MY LIST"}}
           </button>
           <i class="far fa-thumbs-up"></i>
           <i class="far fa-thumbs-up dislike"></i>
@@ -28,7 +30,7 @@
         <img
           class="poster"
           v-if="!this.videoLoaded"
-          :src="'http://image.tmdb.org/t/p/w1280'+content.backdrop_path"
+          :src="'https://image.tmdb.org/t/p/w1280'+content.backdrop_path"
           alt="noImg"
         />
       </transition>
@@ -45,12 +47,15 @@
   </div>
 </template>
 <script>
+import { fs } from "../config/fbconfig";
+import { mapState, mapActions } from "vuex";
 export default {
   props: ["content", "closeDetails"],
   data() {
     return {
       videoLink: "",
-      videoLoaded: false
+      videoLoaded: false,
+      isFavourite: false
     };
   },
   watch: {
@@ -59,9 +64,23 @@ export default {
   mounted() {
     this.fetchVideo();
   },
+  computed: {
+    ...mapState(["profileId", "favourites"])
+  },
   methods: {
+    ...mapActions(["removeFavourite", "addFavourite"]),
+    checkIfFavourite() {
+      this.favourites.forEach(element => {
+        if (String(this.content.id) === String(element.id)) {
+          this.isFavourite = true;
+          return false;
+        }
+      });
+    },
     async fetchVideo() {
-      this.videoLoaded = false;
+      (this.videoLink = ""), (this.videoLoaded = false);
+      this.isFavourite = false;
+      this.checkIfFavourite();
       await fetch(
         `https://api.themoviedb.org/3/${this.content.name ? "tv" : "movie"}/${
           this.content.id
@@ -73,8 +92,38 @@ export default {
     showVideo() {
       setTimeout(() => (this.videoLoaded = true), 2500);
     },
-    videoEnded() {
-      console.log("ENDED");
+    addToList() {
+      let contentToAdd = {
+        name: this.content.name ? this.content.name : this.content.title,
+        id: this.content.id,
+        backdrop_path: this.content.backdrop_path,
+        poster_path: this.content.poster_path,
+        overview: this.content.overview,
+        vote_average: this.content.vote_average,
+        release_date: this.content.first_air_date
+          ? this.content.first_air_date.substr(0, 4)
+          : this.content.release_date.substr(0, 4)
+      };
+      fs.collection("users")
+        .doc(localStorage.userId)
+        .collection("profiles")
+        .doc(this.profileId)
+        .collection("favourites")
+        .doc(String(this.content.id))
+        .set(contentToAdd);
+      this.addFavourite(contentToAdd);
+      this.isFavourite = true;
+    },
+    removeFromList() {
+      fs.collection("users")
+        .doc(localStorage.userId)
+        .collection("profiles")
+        .doc(this.profileId)
+        .collection("favourites")
+        .doc(String(this.content.id))
+        .delete();
+      this.removeFavourite(this.content.id);
+      this.isFavourite = false;
     }
   }
 };

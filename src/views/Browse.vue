@@ -13,6 +13,14 @@
     <main>
       <Billboard :focus="netflixOriginal[RANDOM]" />
       <List
+        v-if="favourites.length > 0"
+        listTitle="My List"
+        :content="favourites"
+        :index="-1"
+        :selected="selectedIndex"
+        :changeIndex="changeDetailsIndex"
+      />
+      <List
         listTitle="Tv shows"
         :content="tv"
         :index="0"
@@ -61,15 +69,15 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar';
-import Billboard from '../components/Billboard';
-import List from '../components/List';
-import Footer from '../components/Footer';
+import Navbar from "../components/Navbar";
+import Billboard from "../components/Billboard";
+import List from "../components/List";
+import Footer from "../components/Footer";
 
-import { mapState } from 'vuex';
+import { mapState, mapActions } from "vuex";
 export default {
-  name: 'browse',
-  props: ['profileId'],
+  name: "browse",
+  props: ["profileId"],
   data() {
     return {
       loading: true,
@@ -85,13 +93,16 @@ export default {
     Footer
   },
   computed: {
-    ...mapState(['movie', 'tv', 'netflixOriginal'])
+    ...mapState(["movie", "tv", "netflixOriginal", "favourites"])
   },
   mounted() {
     setTimeout(() => (this.loading = false), 5500);
-    document.addEventListener('scroll', this.handleScroll);
+    document.addEventListener("scroll", this.handleScroll);
+    this.setProfileId(this.profileId);
+    this.fetchFavourites();
   },
   methods: {
+    ...mapActions(["setProfileId", "fetchFavourites"]),
     handleScroll() {
       if (window.pageYOffset < 25) this.scrolling = false;
       else this.scrolling = true;
