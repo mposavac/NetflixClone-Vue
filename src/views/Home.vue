@@ -34,7 +34,7 @@
         {{option==='Sign In'?'New to Netflix? ':'Already have an account? '}}
         <span
           @click="switchToSignUp"
-        >{{option==='Sign In'? 'Sign up now.': "Sign Up."}}</span>
+        >{{option==='Sign In'? 'Sign up now.': "Sign In."}}</span>
       </p>
     </form>
   </div>
